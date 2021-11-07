@@ -45,17 +45,20 @@ public class PlayerFish : Fish
 		maxExp = ( level*level*level*5 + level*55 ) / 3;
 		maxCorrupt = 100 + level * 40;
 		size = 1 + (level - 1) * 0.3f;
+		UILevelTxt.instance.SetValue(level);
+		UIHMMaxBar.instance.SetValue(maxCorrupt / 300f);
 	}
 	private void addExp(int _xp)
 	{
 		//when player eat feed, player's exp up
 		exp += _xp;
-		if(exp > maxExp)
+		if(exp >= maxExp)
 		{
 			exp -= maxExp;
 			levelUP();
 		}
-//		Debug.LogFormat("XP : {0}, HM : {1}, Level : {2}", exp, corrupt, level);
+		UIExpBar.instance.SetValue(exp / (float)maxExp);
+		Debug.LogFormat("XP : {0}, HM : {1}, Level : {2}", exp, corrupt, level);
 	}
 
 	protected override void _start()
@@ -73,6 +76,7 @@ public class PlayerFish : Fish
 	{
 		base.eat(_xp, heavyMetal);
 		addExp(_xp);
+		UIHMBar.instance.SetValue( (corrupt / 300f)*0.96f + 0.04f );
 	}
 
 	//for avoiding spawn feeds and enemies near the player
