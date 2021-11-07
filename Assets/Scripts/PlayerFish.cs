@@ -33,6 +33,7 @@ public class PlayerFish : Fish
 			if( sign(dx) * prevDx < 0 ) isTurning=true;
 			if(dx> 0) prevDx=1;
 			else if(dx < 0) prevDx=-1;
+			facingRight = (prevDx == 1);
 		}
     }
 	private void levelUP()

@@ -5,11 +5,13 @@ using UnityEngine;
 public class Fish : MonoBehaviour
 {
 	protected bool isTurning;
+	protected bool facingRight;
 	protected Vector2 dir;
 
 	private float _size;
 	public int corrupt{get; private set;}
 
+	protected SpriteRenderer sprite;
 	protected Animator anim;
 	protected Rigidbody2D rigidbody2d;
 
@@ -39,8 +41,10 @@ public class Fish : MonoBehaviour
 	{
 		size = 1;
 		isTurning=false;
+		facingRight=false;
 		anim = GetComponent<Animator>();
 		rigidbody2d = GetComponent<Rigidbody2D>();
+		sprite = GetComponent<SpriteRenderer>();
 	}
 	public void Start()
 	{
@@ -81,13 +85,17 @@ public class Fish : MonoBehaviour
 		if(isTurning)
 		{
 			anim.SetTrigger("Turning");
+//			turn();
+			sprite.flipX=!facingRight;
 		}
 	}
 
 	public void turn()
 	{
+/*		sprite.flipX=facingRight;
 		Vector2 scale= transform.localScale;
-		scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
-		transform.localScale = scale;
+		if(dir.x <= 0.001f) scale.x *= -1;
+		else scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
+		transform.localScale = scale;*/
 	}
 }
