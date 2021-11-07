@@ -13,24 +13,19 @@ public class Feed : MonoBehaviour
 
 	public static int count = 0;
 
-	private bool randomBool()
-	{
-		return Random.value > 0.5;
-	}
-
 	public void Awake()
 	{
 		count++;
 	}
 	public void Start()
 	{
-		dir = new Vector2(randomBool() ? 1f : -1f, Random.Range(-0.2f, 0.2f));
+		dir = new Vector2(MyUtils.randomBool() ? 1f : -1f, Random.Range(-0.2f, 0.2f));
 		dir.Normalize();
 		dir *= 0.5f;
 		rigidbody2d = GetComponent<Rigidbody2D>();
 		feedSprite = GetComponent<SpriteRenderer>();
 
-		isHeavyMetal = randomBool();
+		isHeavyMetal = MyUtils.randomBool();
 		if(isHeavyMetal)
 		{
 			Color c = new Color(0.95f, 0.33f, 0.3f, 1.0f);

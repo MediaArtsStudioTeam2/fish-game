@@ -9,13 +9,23 @@ public class Fish : MonoBehaviour
 	protected Vector2 dir;
 
 	private float _size;
+	protected float speedMult;
 	public int corrupt{get; private set;}
+
+	private int _level;
+	public int level{
+		get{return _level;} 
+		set{
+			if(value > 0) _level = value;
+			else _level = 1;
+		}
+	}
+	public virtual int eatLevel{get;}
+	public virtual bool isPlayer{get;}
 
 	protected SpriteRenderer sprite;
 	protected Animator anim;
 	protected Rigidbody2D rigidbody2d;
-
-	public static int count = 0;
 
 	public float size
 	{
@@ -30,18 +40,13 @@ public class Fish : MonoBehaviour
 		}
 	}
 
-	protected int sign(float a)
-	{
-		if(a > 0f) return 1;
-		else if(a < 0f) return -1;
-		else return 0;
-	}
-
 	protected virtual void _start()
 	{
 		size = 1;
+		corrupt = 0;
+		speedMult = 5f;
 		isTurning=false;
-		facingRight=false;
+		facingRight=true;
 		anim = GetComponent<Animator>();
 		rigidbody2d = GetComponent<Rigidbody2D>();
 		sprite = GetComponent<SpriteRenderer>();
@@ -50,12 +55,12 @@ public class Fish : MonoBehaviour
 	{
 		_start();
 	}
-	protected virtual void _move()
+	protected virtual void _fixedUpdate()
 	{
 	}
 	public void FixedUpdate()
 	{
-		_move();
+		_fixedUpdate();
 	}
 	protected virtual void _update()
 	{
@@ -78,24 +83,15 @@ public class Fish : MonoBehaviour
 		anim.SetFloat("move", horizMove);
 
 		//rotating
-		float rotateDeg = Mathf.Atan2(dir.y * dir.x / 5f, 5f) * Mathf.Rad2Deg;
+		float rotateDeg = Mathf.Atan2(dir.y * dir.x / speedMult, speedMult) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(Vector3.forward * rotateDeg);
 
 		//turning
 		if(isTurning)
 		{
 			anim.SetTrigger("Turning");
-//			turn();
 			sprite.flipX=!facingRight;
 		}
 	}
 
-	public void turn()
-	{
-/*		sprite.flipX=facingRight;
-		Vector2 scale= transform.localScale;
-		if(dir.x <= 0.001f) scale.x *= -1;
-		else scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
-		transform.localScale = scale;*/
-	}
 }
