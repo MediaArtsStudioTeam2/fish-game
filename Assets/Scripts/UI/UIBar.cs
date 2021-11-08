@@ -31,7 +31,6 @@ public class UIBar : MonoBehaviour
 	}
 	public void SetValue(float value)
 	{
-		Debug.LogFormat("isHoriz : {0}, origSize : {1}, value : {2}",isHorizontal, originalSize, value);
 		float size = originalSize * value;
 		if(isHorizontal) mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, size);
 		else mask.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, size);

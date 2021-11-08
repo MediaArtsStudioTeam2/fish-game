@@ -7,9 +7,14 @@ static class Consts
     public const float leftBorder=-18f;
     public const float rightBorder=18f;
     public const float upBorder=0f;
-    public const float downBorder=-12f;
-    public const float distFromPlayer=2f;
+    public const float downBorder=-18f;
     public const float overlayHeavyMetal = 100f;
+
+    public static int ObstacleLayer = LayerMask.GetMask("Obstacles");
+    public static int FishLayer = LayerMask.GetMask("Fish", "OtherFish");
+
+    public const float detectWallRange=3f;
+    public const float chaseRange=7f;
 }
 
 static class MyUtils
@@ -23,5 +28,9 @@ static class MyUtils
     public static bool randomBool()
     {
         return Random.value > 0.5;
+    }
+    public static int boolToSign(bool b)
+    {
+        return b ? 1 : -1;
     }
 }

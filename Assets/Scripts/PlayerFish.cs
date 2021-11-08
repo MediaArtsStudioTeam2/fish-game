@@ -29,10 +29,10 @@ public class PlayerFish : Fish
 		rigidbody2d.MovePosition(position);
 
 		//turning
-		isTurning=false;
+//		isTurning=false;
 		if(!isJumping)
 		{
-			if( MyUtils.sign(dx) * prevDx < 0 ) isTurning=true;
+			if( MyUtils.sign(dx) * prevDx < 0 ) turn();//isTurning=true;
 			if(dx> 0) prevDx=1;
 			else if(dx < 0) prevDx=-1;
 			facingRight = (prevDx == 1);

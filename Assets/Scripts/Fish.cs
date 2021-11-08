@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-	protected bool isTurning;
+//	protected bool isTurning;
 	protected bool facingRight;
 	protected Vector2 dir;
 
 	private float _size;
 	protected float speedMult;
-	public int corrupt{get; private set;}
+
+	private int _corrupt;
+	public int corrupt{
+		get{return _corrupt;} 
+		set{
+			if(value > 0) _corrupt = value;
+			else _corrupt = 0;
+		}
+	}
 
 	private int _level;
 	public int level{
@@ -45,7 +53,7 @@ public class Fish : MonoBehaviour
 		size = 1;
 		corrupt = 0;
 		speedMult = 5f;
-		isTurning=false;
+//		isTurning=false;
 		facingRight=true;
 		anim = GetComponent<Animator>();
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -87,11 +95,17 @@ public class Fish : MonoBehaviour
 		transform.rotation = Quaternion.Euler(Vector3.forward * rotateDeg);
 
 		//turning
-		if(isTurning)
+/*		if(isTurning)
 		{
 			anim.SetTrigger("Turning");
 			sprite.flipX=!facingRight;
-		}
+		}*/
+	}
+	protected void turn()
+	{
+		//turning
+		anim.SetTrigger("Turning");
+		sprite.flipX=facingRight;
 	}
 
 }
