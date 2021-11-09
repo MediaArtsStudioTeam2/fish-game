@@ -1379,7 +1379,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 50, y: 1}
+  m_Size: {x: 80, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &736956627
 GameObject:
@@ -2807,7 +2807,7 @@ GameObject:
   - component: {fileID: 1699069783}
   - component: {fileID: 1699069782}
   - component: {fileID: 1699069781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rocks
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
