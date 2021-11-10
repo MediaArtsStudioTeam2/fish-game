@@ -6,7 +6,7 @@ TagManager:
   tags:
   - FishObject
   - Feed
-  - Obstacle
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -17,8 +17,8 @@ TagManager:
   - Fish
   - OtherFish
   - Obstacles
+  - Border
   - Confiner
-  - 
   - 
   - 
   - 
