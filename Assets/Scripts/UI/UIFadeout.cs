@@ -12,11 +12,11 @@ public class UIFadeout : MonoBehaviour
     {
         StartFadeOut(2.0f, "Opening");
     }
-    public void OnButtonClickedGameover()
+    public void OnButtonClickedRetry()
     {
         StartFadeOut(1.0f, "FishGameMain");
     }
-    public void OnButtonClickedClear()
+    public void OnButtonClickedMain()
     {
         StartFadeOut(2.0f, "StartScreen");
     }
