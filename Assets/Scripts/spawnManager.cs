@@ -8,8 +8,8 @@ public class spawnManager : MonoBehaviour
 	public GameObject algae;
 	public GameObject fish;
 
-	private int maxAlgaeCount=120;
-	private int maxFishCount=15;
+	private int maxAlgaeCount=150;
+	private int maxFishCount=20;
 
 	private IEnumerator spawnAlgae;
 	private IEnumerator spawnFish;
@@ -46,6 +46,12 @@ public class spawnManager : MonoBehaviour
 			if(Vector2.Distance(playerPos, xy) > distFromPlayer) return new Vector3(x, y, (float)layer);
 		}
 	}
+	private int getRandomFishLevel(int playerLevel)
+	{
+		if(playerLevel == 1) return 1;
+		if(Random.value < 0.2f) return playerLevel;
+		return Random.Range(1, getPlayerLevel());
+	}
 	private void _SpawnAlgae()
 	{
 		for(int i=0;i<5;i++)
@@ -65,9 +71,9 @@ public class spawnManager : MonoBehaviour
 			OtherFish newFishHull = newFish.GetComponent<OtherFish>();
 			if(newFishHull != null)
 			{
-				int fishLevel=Random.Range(1, getPlayerLevel()+1);
+				int fishLevel=getRandomFishLevel(getPlayerLevel());
 				newFishHull.level = fishLevel;
-				newFishHull.corrupt = Random.Range(0, 5*(fishLevel-1)+1) * 4;
+				newFishHull.corrupt = Random.Range(0, 5*(fishLevel-1)+1) * 5;
 			}
 		}
 	}
@@ -78,7 +84,7 @@ public class spawnManager : MonoBehaviour
     	while(true)
     	{
     		_SpawnAlgae();
-    		yield return new WaitForSeconds(1f);
+    		yield return new WaitForSeconds(0.6f);
 		}
 	}
 	private IEnumerator SpawnFish()
@@ -87,11 +93,11 @@ public class spawnManager : MonoBehaviour
     	while(true)
     	{
     		_SpawnFish();
-    		yield return new WaitForSeconds(2f);
+    		yield return new WaitForSeconds(getPlayerLevel() == 1 ? 2f : 1f);
 		}
 	}
 	public void Start () {
-		for(int i=0;i<20;i++)
+		for(int i=0;i<30;i++)
 		{
 			Instantiate(algae, getRandomPosition(2,2f), Quaternion.identity);
 		}

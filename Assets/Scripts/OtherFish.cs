@@ -76,6 +76,19 @@ public class OtherFish : Fish
 
 		position += Vector2.ClampMagnitude(dir, speedMult) * Time.fixedDeltaTime;
 		rigidbody2d.MovePosition(position);
+
+		if(position.x < Consts.leftBorder || position.x > Consts.rightBorder) Destroy(gameObject);
+    }
+    private bool OutOfBorder(string tag)
+    {
+    	if(tag != "Border") return false;
+    	int minCorrupt = level * 10;
+    	int maxCorrupt = 10 + level * 20;
+    	Debug.LogFormat("Corrupt : {0}, min : {1}, max : {2}",corrupt, minCorrupt, maxCorrupt);
+    	float chanceBase = (corrupt - minCorrupt) / (float)(maxCorrupt - minCorrupt);
+    	float chance = chanceBase < 0.05f ? 0.05f : Mathf.Sqrt(chanceBase);
+    	Debug.LogFormat("OoB Chance : {0}",chance);
+    	return Random.value < chance;
     }
     private IEnumerator DetectWall() //detect obstacles for each 0.5 secs
     {
@@ -86,6 +99,7 @@ public class OtherFish : Fish
 			RaycastHit2D hit = Physics2D.Raycast(position, lookDirection, Consts.detectWallRange, Consts.ObstacleLayer);
 			if(hit.collider != null)
 			{
+				if(OutOfBorder(hit.collider.tag)) yield break;
 				turn();
 				isTurning=true;
 				facingRight=(MyUtils.sign(dir.x) != 1);
@@ -192,7 +206,6 @@ public class OtherFish : Fish
 			dir.x *= -1;
 			sprite.flipX=true;
 		}
-		size = 1 + (level - 0.5f) * 0.3f;
 		isTurning=false;
 		isChasing=false;
 		isEndChasing=false;

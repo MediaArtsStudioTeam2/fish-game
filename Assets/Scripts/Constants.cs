@@ -10,7 +10,7 @@ static class Consts
     public const float downBorder=-18f;
     public const float overlayHeavyMetal = 100f;
 
-    public static int ObstacleLayer = LayerMask.GetMask("Obstacles");
+    public static int ObstacleLayer = LayerMask.GetMask("Obstacles", "Border");
     public static int FishLayer = LayerMask.GetMask("Fish", "OtherFish");
 
     public const float detectWallRange=3f;

@@ -20,7 +20,7 @@ public class Fish : MonoBehaviour
 		}
 	}
 
-	private int _level;
+	private int _level=1;
 	public int level{
 		get{return _level;} 
 		set{
@@ -28,8 +28,8 @@ public class Fish : MonoBehaviour
 			else _level = 1;
 		}
 	}
-	public virtual int eatLevel{get;}
-	public virtual bool isPlayer{get;}
+	public virtual int eatLevel{get{return 2;}}
+	public virtual bool isPlayer{get{return false;}}
 
 	protected SpriteRenderer sprite;
 	protected Animator anim;
@@ -48,12 +48,15 @@ public class Fish : MonoBehaviour
 		}
 	}
 
+	protected float getSize()
+	{
+		return 0.7f + (eatLevel - 1) * 0.15f;
+	}
 	protected virtual void _start()
 	{
-		size = 1;
+		size = getSize();
 		corrupt = 0;
-		speedMult = 5f;
-//		isTurning=false;
+		speedMult = isPlayer ? 4f : 3f;
 		facingRight=true;
 		anim = GetComponent<Animator>();
 		rigidbody2d = GetComponent<Rigidbody2D>();

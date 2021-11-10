@@ -16,7 +16,7 @@ public class PlayerFish : Fish
 
 
 	public bool isOver;
-	int maxLevel = 10;
+	int maxLevel = 6;
 
 	public GameObject otherFish;
 
@@ -32,7 +32,7 @@ public class PlayerFish : Fish
 			//if the fish goes out of the water, stop controlling and jump.
 			bool isJumping = (position.y >= 0);
 			if (isJumping) dir += new Vector2(0.0f, -0.075f);
-			else dir = new Vector2(dx * 5f, dy * 3f);
+			else dir = new Vector2(dx * speedMult, dy * 0.6f *speedMult);
 
 			position += dir * Time.fixedDeltaTime;
 			rigidbody2d.MovePosition(position);
@@ -54,11 +54,10 @@ public class PlayerFish : Fish
 		level++;
 		maxExp = (level * level * level * 5 + level * 55) / 3;
 		maxCorrupt = 100 + level * 40;
-		size = 1 + (level - 1) * 0.3f;
+		size = getSize();
+		speedMult += 1;
 		UILevelTxt.instance.SetValue(level);
 		UIHMMaxBar.instance.SetValue(maxCorrupt / 300f);
-		Debug.Log(level);
-		Debug.Log(maxLevel);
 		if (level >= maxLevel)
         {
 			
@@ -77,7 +76,7 @@ public class PlayerFish : Fish
 			levelUP();
 		}
 		UIExpBar.instance.SetValue(exp / (float)maxExp);
-		Debug.LogFormat("XP : {0}, HM : {1}, Level : {2}", exp, corrupt, level);
+//		Debug.LogFormat("XP : {0}, HM : {1}, Level : {2}", exp, corrupt, level);
 	}
 
 	protected override void _start()
