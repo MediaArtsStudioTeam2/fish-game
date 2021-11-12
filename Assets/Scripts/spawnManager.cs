@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class spawnManager : MonoBehaviour
 {
-	public GameObject player;
-	public GameObject algae;
-	public GameObject fish;
+	[SerializeField] private GameObject player;
+	[SerializeField] private GameObject algae;
+	[SerializeField] private GameObject fish;
 
 	private int maxAlgaeCount=150;
 	private int maxFishCount=20;

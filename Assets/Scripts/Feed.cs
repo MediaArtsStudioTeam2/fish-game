@@ -8,7 +8,7 @@ public class Feed : MonoBehaviour
 	private Vector2 dir;
 	protected Rigidbody2D rigidbody2d;
 
-	public bool isHeavyMetal;
+	public bool isHeavyMetal{get; private set;}
 	private SpriteRenderer feedSprite;
 
 	public static int count = 0;

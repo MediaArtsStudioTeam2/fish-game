@@ -7,6 +7,8 @@ public class SoundManagerScript : MonoBehaviour
     public static AudioClip eatFoodSound;
     public static AudioClip BackgroundMusic;
     static AudioSource audioSrc;
+//    static AudioSource bgmChannel;
+  //  static AudioSource sfxChannel;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class SoundManagerScript : MonoBehaviour
     }
 
     public static void PlaySound (string clip) {
+        Debug.Log("Yes!");
         switch (clip) {
         case "eatFoodSound":
             audioSrc.PlayOneShot (eatFoodSound);

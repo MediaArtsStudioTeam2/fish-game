@@ -18,7 +18,7 @@ public class PlayerFish : Fish
 	public bool isOver;
 	int maxLevel = 6;
 
-	public GameObject otherFish;
+	[SerializeField] private GameObject otherFish;
 
 	private void playerControl()
 	{
@@ -93,8 +93,8 @@ public class PlayerFish : Fish
 	}
 	public override void eat(int _xp, int heavyMetal)
 	{
-		SoundManagerScript.PlaySound("eatFoodSound");
 		base.eat(_xp, heavyMetal);
+		SoundManagerScript.PlaySound("eatFoodSound");
 		addExp(_xp);
 		UIHMBar.instance.SetValue((corrupt / 300f) * 0.96f + 0.04f);
 		if (corrupt >= maxCorrupt)

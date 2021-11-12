@@ -23,6 +23,7 @@ public class FadeOut : MonoBehaviour
 
 	IEnumerator FadeOut_(float time, string scene)
 	{
+		GamePause.isOver=true;
 		SpriteRenderer sr = this.gameObject.GetComponent<SpriteRenderer>();
 		Color tempColor = sr.color;
 		while (tempColor.a < 1f)

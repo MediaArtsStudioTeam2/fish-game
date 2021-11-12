@@ -9,11 +9,13 @@ public class VideoCheck : MonoBehaviour
 	public VideoPlayer vid;
 	public SpriteRenderer sp;
 	public string scene;
+	private bool shownTxt;
 	// Start is called before the first frame update
 	void Start()
 	{
 		sp = this.GetComponent<SpriteRenderer>();
 		vid = this.GetComponent<VideoPlayer>();
+		shownTxt=false;
 	}
 
 	// Update is called once per frame
@@ -26,6 +28,14 @@ public class VideoCheck : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
 			StartFadeOut(0.5f);
+		}
+		if(Input.GetMouseButtonDown(0) && !shownTxt)
+		{
+			if(UIShowSkipTxt.instance != null)
+			{
+				UIShowSkipTxt.instance.Show(1f);
+				shownTxt=true;
+			}
 		}
 		if (vid.frame >= (long)vid.frameCount - 5)
 		{
